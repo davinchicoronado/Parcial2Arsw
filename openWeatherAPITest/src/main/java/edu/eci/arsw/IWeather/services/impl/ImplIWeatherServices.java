@@ -5,15 +5,15 @@
  */
 package edu.eci.arsw.IWeather.services.impl;
 
-import com.google.gson.Gson;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import edu.eci.arsw.IWeather.externalapi.HttpClientServices;
-import edu.eci.arsw.IWeather.model.WheaterCountry;
+import edu.eci.arsw.IWeather.model.WeatherCity;
 import edu.eci.arsw.IWeather.persistence.IWeatherCache;
 import edu.eci.arsw.IWeather.services.IWeatherServices;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,27 +32,34 @@ public class ImplIWeatherServices implements IWeatherServices{
     HttpClientServices connectionclient;
 
     @Override
-    public String getWeatherContry(String country) {
-        if(cache.inCache(country)){
-            return cache.getweatherCountry(country);
+    public WeatherCity getWeatherContry(String city) {
+        if(cache.inCache(city)){
+            return cache.getweatherCountry(city);
         
         }
         else{
             try { 
                 
-                String informationWheater =   connectionclient.getWheater(country);
+                String informationWheater =   connectionclient.getWheater(city);
+                
+           
+                
+                JSONObject jsonWheater = new JSONObject(informationWheater);
+                JSONObject coord = new JSONObject(jsonWheater.get("coord").toString());
+                
+                JSONArray wheaterlist = jsonWheater.getJSONArray("weather");
+                JSONObject wheater= new JSONObject(wheaterlist.get(0).toString());
+
+                float lon =Float.parseFloat(coord.get("lon").toString());
+                float lat =Float.parseFloat(coord.get("lat").toString());
+                int id = Integer.parseInt(wheater.get("id").toString());
+                
+                WeatherCity wc = new WeatherCity(lon,lat,id,wheater.get("main").toString(),wheater.get("description").toString(),wheater.get("icon").toString());
                 
                 
-                
-                //final Gson gson = new Gson();
-                //final Properties properties = gson.fromJson(informationWheater, Properties.class);
-                //WheaterCountry wc = new WheaterCountry(Float.parseFloat(properties.getProperty("lon")),Float.parseFloat(properties.getProperty("lot")));
-                
-                cache.saveweatherCountry(country, informationWheater);
-                
-                
-                
-                return informationWheater;
+                cache.saveweatherCountry(city, wc);
+                      
+                return wc;
                 
             } catch (UnirestException ex) {
                 Logger.getLogger(ImplIWeatherServices.class.getName()).log(Level.SEVERE, null, ex);

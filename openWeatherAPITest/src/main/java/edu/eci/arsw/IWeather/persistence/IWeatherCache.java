@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.IWeather.persistence;
 
+import edu.eci.arsw.IWeather.model.WeatherCity;
 import java.util.HashMap;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +17,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class IWeatherCache {
     
-     HashMap<String, String> weatherCountries= new HashMap();
+     HashMap<String, WeatherCity> weatherCountries= new HashMap();
     
        /**
-     * Metodo que verifica si hay informacion del cilma de un pais
-     * @param country
+     * Metodo que verifica si hay informacion del cilma de una ciudad
+     * @param city
      * @return boolean
      */
     
-    public boolean inCache(String country){
-         if(weatherCountries.containsKey(country)){
+    public boolean inCache(String city){
+         if(weatherCountries.containsKey(city)){
              return true;
          }
          else{
@@ -35,22 +36,21 @@ public class IWeatherCache {
      
            /**
      * Metodo que permite obtener la informacion del clima de un pais
-     * @param country
+     * @param city
      * @return boolean
      */
     
-     public String getweatherCountry(String country){         
-         return weatherCountries.get(country);
+     public WeatherCity getweatherCountry(String city){         
+         return weatherCountries.get(city);
      }
       /**
      * Metodo que permite guardar la informacion del clima de un pais
-     * @param country
-     * @param information wheater
-     * 
+     * @param city 
+     * @param wc information clima
      */
      
-     public void saveweatherCountry(String country,String information){ 
-         weatherCountries.put(country, information);
+     public void saveweatherCountry(String city,WeatherCity wc){ 
+         weatherCountries.put(city, wc);
      }
     
 }

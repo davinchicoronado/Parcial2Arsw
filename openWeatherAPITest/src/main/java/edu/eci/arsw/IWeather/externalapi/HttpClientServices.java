@@ -18,9 +18,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 public class HttpClientServices {
     
     
-    public String getWheater(String country) throws UnirestException {
+    public String getWheater(String city) throws UnirestException {
         
-        HttpResponse<String> response = Unirest.get("http://api.openweathermap.org/data/2.5/weather?q="+country+"&appid=8afbc8e19fe0bea83d243309b7d5f76d")
+        HttpResponse<String> response = Unirest.get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=8afbc8e19fe0bea83d243309b7d5f76d")
                 .asString();
         
         return response.getBody();

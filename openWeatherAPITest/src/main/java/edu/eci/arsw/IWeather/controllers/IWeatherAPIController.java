@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author David Coronado
  */ 
 @RestController
-@RequestMapping(value = "/wheater")
+@RequestMapping(value = "/weather")
 public class IWeatherAPIController {
     @Autowired
     IWeatherServices wservices;
     
     
-    @RequestMapping(path ="/{country}",method = RequestMethod.GET)
-    public ResponseEntity<?> getWheaterCountry(@PathVariable ("country") String country){
+    @RequestMapping(path ="/{city}",method = RequestMethod.GET)
+    public ResponseEntity<?> getWheaterCountry(@PathVariable ("city") String city){
         
-        return new ResponseEntity<>(wservices.getWeatherContry(country),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(wservices.getWeatherContry(city),HttpStatus.ACCEPTED);
      
         
     }  

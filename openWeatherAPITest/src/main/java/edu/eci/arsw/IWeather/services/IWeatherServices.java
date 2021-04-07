@@ -5,6 +5,8 @@
  */
 package edu.eci.arsw.IWeather.services;
 
+import edu.eci.arsw.IWeather.model.WeatherCity;
+
 /**
  *
  * @author David Coronado
@@ -14,11 +16,10 @@ public interface IWeatherServices {
         /**
      * Permite realizar una consulta a otra app o al cache si es el caso
      * 
-     * @param country
-     * @return información del clima de un pais
-     * 
+     * @param city
+     * @return información del clima de una ciudad
      */
     
-    public String getWeatherContry(String country);
+    public WeatherCity getWeatherContry(String city);
     
 }
