@@ -105,7 +105,28 @@ document.getElementById("demo").innerHTML = "name: " + obj.name + ", age: " + ob
 </body>
 </html>
 
-```
+``` 
+## Ejecución
 
+Para ejecutar localmente se puede descargar el archivo zip  o clonando el proyecto de la siguiente manera
+
+``` 
+git clone https://github.com/davinchicoronado/Parcial2Arsw.git
+``` 
+
+Y para ejecutar con el siguiente comando
+
+``` 
+mvn spring-boot:run
+```  
+
+## Extension
+
+Se tiene la interfaz IWeatherService que es una interfaz, conociendo esto se pueden
+crear diferentes implementaciones de estos servicios, como por ejemplo consumir otras aplicaciones del clima,
+o tambien proveer diferentes tipos de servicios. 
+
+
+link del repositorio : https://github.com/davinchicoronado/Parcial2Arsw
 * Código de página con Mapa embebido [(Ver archivo)](index.html)
     
