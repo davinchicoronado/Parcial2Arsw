@@ -122,7 +122,7 @@ mvn spring-boot:run
 
 ## Extension
 
-Se tiene la interfaz IWeatherService que es una interfaz, conociendo esto se pueden
+Se tiene la interfaz IWeatherService , conociendo esto se pueden
 crear diferentes implementaciones de estos servicios, como por ejemplo consumir otras aplicaciones del clima,
 o tambien proveer diferentes tipos de servicios. 
 
