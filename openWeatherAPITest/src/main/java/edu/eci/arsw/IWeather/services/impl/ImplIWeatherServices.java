@@ -5,10 +5,13 @@
  */
 package edu.eci.arsw.IWeather.services.impl;
 
+import com.google.gson.Gson;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import edu.eci.arsw.IWeather.externalapi.HttpClientServices;
+import edu.eci.arsw.IWeather.model.WheaterCountry;
 import edu.eci.arsw.IWeather.persistence.IWeatherCache;
 import edu.eci.arsw.IWeather.services.IWeatherServices;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +38,20 @@ public class ImplIWeatherServices implements IWeatherServices{
         
         }
         else{
-            try {
+            try { 
+                
                 String informationWheater =   connectionclient.getWheater(country);
+                
+                
+                
+                //final Gson gson = new Gson();
+                //final Properties properties = gson.fromJson(informationWheater, Properties.class);
+                //WheaterCountry wc = new WheaterCountry(Float.parseFloat(properties.getProperty("lon")),Float.parseFloat(properties.getProperty("lot")));
+                
                 cache.saveweatherCountry(country, informationWheater);
+                
+                
+                
                 return informationWheater;
                 
             } catch (UnirestException ex) {
